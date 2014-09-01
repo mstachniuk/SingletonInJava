@@ -1,20 +1,20 @@
 package com.blogspot.mstachniuk.singletoninjava;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.MockPolicy;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-@RunWith(PowerMockRunner.class)
-@MockPolicy(ElvisMockPolicy.class)
 public class ElvisProfitServiceTest {
 
     @Test
     public void shouldCalculateElvisProfit() {
         // given
         ElvisProfitService service = new ElvisProfitService();
+        Elvis elvis = mock(Elvis.class);
+        when(elvis.howOldIsElvisNow()).thenReturn(1);
+        service.setElvis(elvis);
 
         // when
         double elvisProfit = service.calculateElvisProfit();
